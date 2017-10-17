@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "808385021400",
+    "firebase_url": "https://eagleme-b2681.firebaseio.com",
+    "project_id": "eagleme-b2681",
+    "storage_bucket": "eagleme-b2681.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:808385021400:android:7a50450116e5531f",
+        "android_client_info": {
+          "package_name": "com.star.eagleme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "808385021400-07tp0u3rbgc1ehka25vb8hb70skcqb1j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0sBjr12BLD-LtNm7cKpgf6xfu8uAqnNY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
