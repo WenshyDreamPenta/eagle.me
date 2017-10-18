@@ -7,6 +7,8 @@ package com.star.eagleme; /**
 import android.content.Context;
 import android.support.multidex.MultiDexApplication;
 
+import com.facebook.stetho.Stetho;
+
 public class BaseApplication extends MultiDexApplication
 {
     private static Context mContext = null;
@@ -16,6 +18,8 @@ public class BaseApplication extends MultiDexApplication
     {
         super.onCreate();
         mContext = getApplicationContext();
+        //设置Stetho
+        Stetho.initializeWithDefaults(mContext);
 
     }
 

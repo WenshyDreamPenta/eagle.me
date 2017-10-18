@@ -97,7 +97,7 @@ public class DataProtocol extends BasicProtocol implements Serializable
         baos.write(pattion, 0, PATTION_LEN);       //业务类型
         baos.write(dtype, 0, DTYPE_LEN);           //业务数据格式
         baos.write(msgid, 0, MSGID_LEN);           //消息id
-        baos.write(data, 0, data.length);          //业务数据
+        baos.write(data, 0, data.length);          //业务数据 需要可以使用xml或JSon解析
         return baos.toByteArray();
     }
 

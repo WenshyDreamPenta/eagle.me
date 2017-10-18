@@ -289,7 +289,7 @@ public class ClientRequestTask implements Runnable
             switch (msg.what)
             {
                 case SUCCESS:
-                    mRequestCallBack.onSuccess((BasicProtocol) msg.obj);
+                    mRequestCallBack.onSuccess( msg.obj);
                     break;
                 case FAILED:
                     mRequestCallBack.onFailed(msg.arg1, (String) msg.obj);

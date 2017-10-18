@@ -28,7 +28,7 @@ public class ManageLog
 {
 
     // Log关闭变量
-    public static boolean bOpenLog = false;
+    public static boolean bOpenLog = true;
     private static boolean bOpenSaveLogToFile = false;
 
     // Log等级,默认为VERBOSE，即全部输出
@@ -340,6 +340,7 @@ public class ManageLog
             return;
         }
         File logfile[] = logdir.listFiles();
+        if(logfile == null) return;
         int lens = logfile.length;
         if (lens > 0)
         {
