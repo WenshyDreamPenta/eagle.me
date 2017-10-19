@@ -1,23 +1,20 @@
 package com.star.eagleme.activitity;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.star.eagleme.R;
+import com.star.eagleme.socket.client.ConnectionClient;
 import com.star.eagleme.socket.protocol.DataAckProtocol;
 import com.star.eagleme.socket.protocol.DataProtocol;
-import com.star.eagleme.socket.request.ClientRequestTask;
 import com.star.eagleme.socket.request.RequestCallBack;
 import com.star.eagleme.utils.ManageLog;
-import com.star.eagleme.widgets.animview.PointAnimView;
-import com.star.eagleme.widgets.refreshview.CommonRefreshLayout;
-import com.star.eagleme.widgets.refreshview.HeaderReFresh;
 
-import java.util.ArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -31,29 +28,16 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
-    private ClientRequestTask clientRequestTask;
     private ThreadPoolExecutor threadPoolExecutor;
+    private ConnectionClient connClinet;
+    private RequestCallBack requestCallBack;
 
     private TextView etText;
     private TextView etSend;
+    private TextView tvget;
+    private TextView tvclose;
+    private TextView tvconnect;
 
-    /**
-     * 下拉刷新控件
-     */
-    private CommonRefreshLayout crl;
-
-    /**
-     * 列表控件
-     */
-    private RecyclerView rv;
-
-    /**
-     * 显示数据
-     */
-    private ArrayList<String> data = new ArrayList<String>();
-
-    private HeaderReFresh headerReFresh;
-    private PointAnimView pointAnimView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -61,33 +45,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
+        initThreadExcute();
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                .detectDiskReads().detectDiskWrites().detectNetwork()
+                .penaltyLog().build());
+        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                .detectLeakedSqlLiteObjects().detectLeakedClosableObjects()
+                .penaltyLog().penaltyDeath().build());
 
-        threadPoolExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
-        clientRequestTask = new ClientRequestTask(new RequestCallBack() {
-
-            @Override
-            public void onSuccess(Object msg)
-            {
-                if(msg instanceof DataAckProtocol)
-                {
-                    ManageLog.D("DataAckProtocol-msg", ((DataAckProtocol) msg).getUnused());
-                }
-                else
-                {
-                    ManageLog.D("msg", msg.toString());
-                }
-
-            }
-
-            @Override
-            public void onFailed(int errorCode, String msg)
-            {
-
-            }
-        });
-        setRequest();
-
-        pointAnimView.setRadius(20f);
+        //pointAnimView.setRadius(20f);
 
     }
 
@@ -104,8 +70,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     data.setData(sendText);
                     data.setDtype(1);
                     data.setMsgId(22);
-                    clientRequestTask.addRequest(data);
+                    if(connClinet == null) return;
+                    connClinet.addNewRequest(data);
                 }
+                break;
+            case R.id.tv_close:
+                if (connClinet != null)
+                {
+                    connClinet.closeConnect();
+                } else
+                {
+                    Toast.makeText(this, "please connect server!", Toast.LENGTH_LONG);
+                }
+                break;
+            case R.id.tv_connect:
+                connClinet = new ConnectionClient(requestCallBack);
+                break;
+            case R.id.tv_get:
                 break;
             default:
                 break;
@@ -116,16 +97,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         etText = (TextView) findViewById(R.id.et_text);
         etSend = (TextView) findViewById(R.id.tv_send);
+        tvget = (TextView) findViewById(R.id.tv_get);
+        tvclose = (TextView) findViewById(R.id.tv_close);
+        tvconnect = (TextView) findViewById(R.id.tv_connect);
 
-        pointAnimView = (PointAnimView) findViewById(R.id.pv_animview);
+        // pointAnimView = (PointAnimView) findViewById(R.id.pv_animview);
 
         etSend.setOnClickListener(this);
+        tvclose.setOnClickListener(this);
+        tvconnect.setOnClickListener(this);
+        tvget.setOnClickListener(this);
     }
 
-    private void  setRequest()
+    private void initThreadExcute()
     {
+        threadPoolExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+        requestCallBack = new RequestCallBack()
+        {
 
-        threadPoolExecutor.execute(clientRequestTask);
+            @Override
+            public void onSuccess(Object msg)
+            {
+                if (msg instanceof DataAckProtocol)
+                {
+                    ManageLog.D("DataAckProtocol-msg", ((DataAckProtocol) msg).getUnused());
+                } else
+                {
+                    ManageLog.D("msg", msg.toString());
+                }
+
+            }
+
+            @Override
+            public void onFailed(int errorCode, String msg)
+            {
+
+            }
+        };
 
     }
+
+
+
+
+
+
+
+
+
+
+
 }

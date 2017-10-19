@@ -57,6 +57,7 @@ public class ClientRequestTask implements Runnable
             try
             {
                 //创建长连接socket 连接到服务器
+                System.setProperty("http.keepAlive", "false");
                 mSocket = SocketFactory.getDefault().createSocket(Config.ADDRESS, Config.PORT);
 
             } catch (ConnectException e)
@@ -213,6 +214,11 @@ public class ClientRequestTask implements Runnable
         isLongConnection = false;
     }
 
+    /**
+     * 等待线程
+     *
+     * @param o
+     */
     private void toWait(Object o)
     {
         synchronized (o)
@@ -289,7 +295,7 @@ public class ClientRequestTask implements Runnable
             switch (msg.what)
             {
                 case SUCCESS:
-                    mRequestCallBack.onSuccess( msg.obj);
+                    mRequestCallBack.onSuccess(msg.obj);
                     break;
                 case FAILED:
                     mRequestCallBack.onFailed(msg.arg1, (String) msg.obj);
@@ -324,7 +330,7 @@ public class ClientRequestTask implements Runnable
                     BasicProtocol reciverData = SocketUtil.readFromStream(inputStream);
                     if (reciverData != null)
                     {
-                        if (reciverData.getProtocolType() == 1 || reciverData.getProtocolType() == 3)
+                        if (reciverData.getProtocolType() == 1 || reciverData.getProtocolType() == 3 || reciverData.getProtocolType() == 0)
                         {
                             successMessage(reciverData);
                         }
@@ -381,13 +387,13 @@ public class ClientRequestTask implements Runnable
     }
 
     /**
-     * 心跳实现，频率5秒
+     * 心跳发送线程，频率5秒
      * Created by Star on 2017/08/23.
      */
     public class HeartBeatTask extends Thread
     {
 
-        private static final int REPEATTIME = 10000;
+        private static final int REPEATTIME = 5000;
         private boolean isCancle = false;
         private OutputStream outputStream;
         private int pingId;
@@ -422,12 +428,13 @@ public class ClientRequestTask implements Runnable
                     pingProtocol.setPingId(pingId);
                     pingProtocol.setUnused("ping...");
                     SocketUtil.write2Stream(pingProtocol, outputStream);
-                    pingId = pingId + 2;
+                    pingId = pingId + 1;
                 }
 
                 try
                 {
                     Thread.sleep(REPEATTIME);
+
                 } catch (InterruptedException e)
                 {
                     e.printStackTrace();

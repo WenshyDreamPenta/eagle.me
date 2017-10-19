@@ -33,26 +33,75 @@
             android:textSize="16sp"/>
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tv_send"
+    <LinearLayout
+        android:id="@+id/ll_btns"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_below="@id/ll_text"
-        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="25dp">
+        <TextView
+            android:id="@+id/tv_connect"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:background="#000"
+            android:gravity="center"
+            android:text="Connect"
+            android:textColor="#fff"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/tv_close"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:background="#000"
+            android:gravity="center"
+            android:layout_marginLeft="15dp"
+            android:text="Close"
+            android:textColor="#fff"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/tv_send"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:background="#000"
+            android:layout_marginLeft="15dp"
+            android:gravity="center"
+            android:text="Send"
+            android:textColor="#fff"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_http_btns"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/ll_btns"
         android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="50dp"
-        android:background="#000"
-        android:gravity="center"
-        android:text="SEND"
-        android:textColor="#fff"
-        android:textSize="18sp"/>
+        android:layout_marginTop="15dp">
+        <TextView
+            android:id="@+id/tv_get"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:background="#000"
+            android:gravity="center"
+            android:text="Get"
+            android:textColor="#fff"
+            android:textSize="16sp"/>
+
+
+    </LinearLayout>
+
 
     <com.star.eagleme.widgets.animview.PointAnimView
         android:id="@+id/pv_animview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_send"
-        android:layout_marginTop="50dp"/>
+        android:layout_below="@id/ll_btns"
+        android:layout_marginTop="50dp"
+        android:visibility="gone"/>
 </RelativeLayout>
