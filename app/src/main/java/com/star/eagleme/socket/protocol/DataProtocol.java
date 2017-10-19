@@ -1,6 +1,6 @@
 package com.star.eagleme.socket.protocol;
 
-import com.star.eagleme.socket.utils.SocketUtil;
+import com.star.eagleme.utils.SocketUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;

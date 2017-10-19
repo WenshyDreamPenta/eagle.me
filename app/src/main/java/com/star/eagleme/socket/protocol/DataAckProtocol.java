@@ -2,7 +2,7 @@ package com.star.eagleme.socket.protocol;
 
 import android.util.Log;
 
-import com.star.eagleme.socket.utils.SocketUtil;
+import com.star.eagleme.utils.SocketUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;

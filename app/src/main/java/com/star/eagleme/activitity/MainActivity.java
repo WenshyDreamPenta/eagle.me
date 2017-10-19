@@ -12,7 +12,7 @@ import com.star.eagleme.socket.protocol.DataAckProtocol;
 import com.star.eagleme.socket.protocol.DataProtocol;
 import com.star.eagleme.socket.request.ClientRequestTask;
 import com.star.eagleme.socket.request.RequestCallBack;
-import com.star.eagleme.socket.utils.ManageLog;
+import com.star.eagleme.utils.ManageLog;
 import com.star.eagleme.widgets.animview.PointAnimView;
 import com.star.eagleme.widgets.refreshview.CommonRefreshLayout;
 import com.star.eagleme.widgets.refreshview.HeaderReFresh;

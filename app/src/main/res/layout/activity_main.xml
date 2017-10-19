@@ -8,7 +8,7 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
-                tools:context="com.star.eagleme.activitity.ImSoctetActivity">
+                tools:context="com.star.eagleme.activitity.MainActivity">
 
     <LinearLayout
         android:id="@+id/ll_text"

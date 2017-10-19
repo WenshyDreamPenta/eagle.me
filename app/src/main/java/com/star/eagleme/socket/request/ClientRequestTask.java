@@ -8,7 +8,7 @@ import com.star.eagleme.socket.protocol.BasicProtocol;
 import com.star.eagleme.socket.Config;
 import com.star.eagleme.socket.protocol.DataProtocol;
 import com.star.eagleme.socket.protocol.PingProtocol;
-import com.star.eagleme.socket.utils.SocketUtil;
+import com.star.eagleme.utils.SocketUtil;
 
 import java.io.IOException;
 import java.io.InputStream;

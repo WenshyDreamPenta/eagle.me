@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.star.eagleme.socket.utils.ManageLog;
+import com.star.eagleme.utils.ManageLog;
 
 public class SwitchLogReceivcer extends BroadcastReceiver
 {

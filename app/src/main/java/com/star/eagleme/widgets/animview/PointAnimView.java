@@ -175,6 +175,11 @@ public class PointAnimView extends View
     }
 
 
+    /**
+     * Sets interpolator type.
+     *
+     * @param type the type
+     */
     public void setInterpolatorType(int type)
     {
         switch (type)

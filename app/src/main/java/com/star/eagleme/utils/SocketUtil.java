@@ -1,4 +1,4 @@
-package com.star.eagleme.socket.utils;
+package com.star.eagleme.utils;
 
 
 import android.util.Log;
@@ -58,15 +58,16 @@ public class SocketUtil
         return basicProtocol;
     }
 
+
     /**
-     * 读数据
+     * Read from stream basic protocol.
      *
-     * @param inputStream
-     * @return
-     * @throws java.net.SocketException
+     * @param inputStream the input stream
+     * @return the basic protocol
      */
     public static BasicProtocol readFromStream(InputStream inputStream)
     {
+
         BasicProtocol protocol;
         BufferedInputStream bis;
 

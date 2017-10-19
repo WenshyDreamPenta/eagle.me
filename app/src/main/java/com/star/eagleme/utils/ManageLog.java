@@ -1,4 +1,4 @@
-package com.star.eagleme.socket.utils;
+package com.star.eagleme.utils;
 
 import android.content.Context;
 import android.net.ParseException;
@@ -60,7 +60,7 @@ public class ManageLog
             }
         }
     }
-
+    
     public static boolean switchLog(boolean openLog, int level)
     {
 

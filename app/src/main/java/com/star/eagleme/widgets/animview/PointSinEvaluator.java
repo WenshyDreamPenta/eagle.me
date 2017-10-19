@@ -19,7 +19,7 @@ public class PointSinEvaluator implements TypeEvaluator
         Point endPoint = (Point) endValue;
         int x = (int) (startPoint.x + fraction * (endPoint.x - startPoint.x));
 
-        int y = (int) (Math.sin(x * Math.PI / 180) * 100) + endPoint.y / 2;
+        int y = (int) (Math.cos(x * Math.PI / 180) * 100) + endPoint.y / 2;
         Point point = new Point(x, y);
         return point;
     }
