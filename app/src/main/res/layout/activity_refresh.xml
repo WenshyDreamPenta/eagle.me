@@ -3,31 +3,21 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context="com.star.eagleme.activitity.MainActivity">
+                tools:context="com.star.eagleme.activitity.RefreshActivity">
 
-    <com.star.eagleme.widgets.refreshview.CommonRefreshLayout
+    <com.star.eagleme.widgets.refresh.PullRefreshLayout
         android:id="@+id/crl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <RelativeLayout
-            android:id="@+id/rl_refresh"
-            android:layout_width="match_parent"
-            android:layout_height="100dp">
-            <ImageView
-                android:id="@+id/iv_loading"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_centerVertical="true"
-                android:layout_centerInParent="true"/>
-        </RelativeLayout>
+        android:layout_height="match_parent"
+        android:background="@color/color_312e36">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@color/color_312e36"/>
 
-    </com.star.eagleme.widgets.refreshview.CommonRefreshLayout>
+    </com.star.eagleme.widgets.refresh.PullRefreshLayout>
 
 
 </RelativeLayout>

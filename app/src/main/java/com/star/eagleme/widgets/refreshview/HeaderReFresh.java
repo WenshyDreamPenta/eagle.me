@@ -30,8 +30,6 @@ public class HeaderReFresh implements CommonRefreshLayout.OnRefreshListener
     {
         this.mRefreshLayout = crl;
         this.mContext = context;
-        iv_loading = (ImageView) contentView.findViewById(R.id.iv_loading);
-        rl_loading_cover = (RelativeLayout) contentView.findViewById(R.id.rl_refresh);
 
     }
 

@@ -1,5 +1,6 @@
 package com.star.eagleme.activitity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvget;
     private TextView tvclose;
     private TextView tvconnect;
+    private TextView tvrefresh;
 
 
     @Override
@@ -88,6 +90,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.tv_get:
                 break;
+            case R.id.tv_refresh:
+                Intent intent = new Intent(this,RefreshActivity.class);
+                startActivity(intent);
+                break;
             default:
                 break;
         }
@@ -100,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvget = (TextView) findViewById(R.id.tv_get);
         tvclose = (TextView) findViewById(R.id.tv_close);
         tvconnect = (TextView) findViewById(R.id.tv_connect);
+        tvrefresh = (TextView) findViewById(R.id.tv_refresh);
 
         // pointAnimView = (PointAnimView) findViewById(R.id.pv_animview);
 
@@ -107,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvclose.setOnClickListener(this);
         tvconnect.setOnClickListener(this);
         tvget.setOnClickListener(this);
+        tvrefresh.setOnClickListener(this);
     }
 
     private void initThreadExcute()

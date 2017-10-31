@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Eagle.me</string>
+    <string name="title_activity_refresh">RefreshActivity</string>
 </resources>

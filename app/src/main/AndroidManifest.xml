@@ -32,10 +32,8 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </receiver>
-
-        <activity android:name=".activitity.KotlinActivity">
-        </activity>
-        <activity android:name=".activitity.ImSoctetActivity">
+        <activity
+            android:name=".activitity.RefreshActivity">
         </activity>
     </application>
 
