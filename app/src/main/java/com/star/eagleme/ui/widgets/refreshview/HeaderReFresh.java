@@ -1,4 +1,4 @@
-package com.star.eagleme.widgets.refreshview;
+package com.star.eagleme.ui.widgets.refreshview;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;

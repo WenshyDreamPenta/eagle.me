@@ -1,4 +1,4 @@
-package com.star.eagleme.widgets.animview;
+package com.star.eagleme.ui.widgets.animview;
 
 import android.animation.AnimatorSet;
 import android.animation.ArgbEvaluator;

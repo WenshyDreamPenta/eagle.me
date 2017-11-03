@@ -5,7 +5,7 @@ import android.net.ParseException;
 import android.os.Environment;
 import android.util.Log;
 
-import com.star.eagleme.BaseApplication;
+import com.star.eagleme.base.BaseApplication;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

@@ -1,4 +1,4 @@
-package com.star.eagleme.widgets.refresh;
+package com.star.eagleme.ui.widgets.refresh;
 
 import android.content.Context;
 import android.graphics.ColorFilter;

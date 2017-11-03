@@ -5,7 +5,7 @@
                 android:layout_height="match_parent"
                 tools:context="com.star.eagleme.activitity.RefreshActivity">
 
-    <com.star.eagleme.widgets.refresh.PullRefreshLayout
+    <com.star.eagleme.ui.widgets.refresh.PullRefreshLayout
         android:id="@+id/crl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:background="@color/color_312e36"/>
 
-    </com.star.eagleme.widgets.refresh.PullRefreshLayout>
+    </com.star.eagleme.ui.widgets.refresh.PullRefreshLayout>
 
 
 </RelativeLayout>

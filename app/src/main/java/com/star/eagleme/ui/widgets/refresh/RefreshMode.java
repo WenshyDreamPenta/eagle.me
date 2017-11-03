@@ -1,4 +1,4 @@
-package com.star.eagleme.widgets.refresh;
+package com.star.eagleme.ui.widgets.refresh;
 
 /**
  * Created by star on 2017/08/31.

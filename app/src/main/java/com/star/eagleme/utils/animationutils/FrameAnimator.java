@@ -1,4 +1,4 @@
-package com.star.eagleme.utils;
+package com.star.eagleme.utils.animationutils;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,7 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.widget.ImageView;
 
-import com.star.eagleme.BaseApplication;
+import com.star.eagleme.base.BaseApplication;
 
 import java.lang.ref.SoftReference;
 

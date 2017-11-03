@@ -1,11 +1,9 @@
-package com.star.eagleme.broadcast;
+package com.star.eagleme.utils.logutil;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-
-import com.star.eagleme.utils.logutil.ManageLog;
 
 public class SwitchLogReceivcer extends BroadcastReceiver
 {

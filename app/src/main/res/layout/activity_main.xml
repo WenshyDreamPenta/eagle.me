@@ -108,7 +108,7 @@
     </LinearLayout>
 
 
-    <com.star.eagleme.widgets.animview.PointAnimView
+    <com.star.eagleme.ui.widgets.animview.PointAnimView
         android:id="@+id/pv_animview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
