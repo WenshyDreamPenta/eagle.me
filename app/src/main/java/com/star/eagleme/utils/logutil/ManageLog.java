@@ -1,4 +1,4 @@
-package com.star.eagleme.utils;
+package com.star.eagleme.utils.logutil;
 
 import android.content.Context;
 import android.net.ParseException;

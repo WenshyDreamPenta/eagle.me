@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.annotation.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,6 +66,7 @@ public class CacheSoftRef
      * @param resId   资源ID
      * @return
      */
+    @Nullable
     public static BitmapDrawable getBmpDrawable(Context context, int resId)
     {
 

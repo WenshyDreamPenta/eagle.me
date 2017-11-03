@@ -1,4 +1,4 @@
-package com.star.eagleme.utils;
+package com.star.eagleme.socket.socketutils;
 
 
 import android.util.Log;

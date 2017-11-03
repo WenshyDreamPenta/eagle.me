@@ -1,7 +1,7 @@
 package com.star.eagleme.socket.protocol;
 
-import com.star.eagleme.utils.ManageLog;
-import com.star.eagleme.utils.SocketUtil;
+import com.star.eagleme.utils.logutil.ManageLog;
+import com.star.eagleme.socket.socketutils.SocketUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;

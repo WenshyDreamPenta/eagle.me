@@ -14,7 +14,7 @@ import com.star.eagleme.socket.client.ConnectionClient;
 import com.star.eagleme.socket.protocol.DataAckProtocol;
 import com.star.eagleme.socket.protocol.DataProtocol;
 import com.star.eagleme.socket.request.RequestCallBack;
-import com.star.eagleme.utils.ManageLog;
+import com.star.eagleme.utils.logutil.ManageLog;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
