@@ -1,4 +1,4 @@
-package com.star.eagleme.base; /**
+package com.star.eagleme; /**
  * Created by star on 2017/8/22.
  *
  * @description:

@@ -11,7 +11,7 @@ import com.star.eagleme.R;
 import com.star.eagleme.adapter.EasyAdapter;
 import com.star.eagleme.bean.EasyBean;
 import com.star.eagleme.ui.divider.RecyclerViewDivider;
-import com.star.eagleme.base.BaseApplication;
+import com.star.eagleme.BaseApplication;
 import com.star.eagleme.ui.widgets.refresh.PullRefreshLayout;
 
 import java.util.ArrayList;

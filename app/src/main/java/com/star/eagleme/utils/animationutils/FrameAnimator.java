@@ -8,7 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.widget.ImageView;
 
-import com.star.eagleme.base.BaseApplication;
+import com.star.eagleme.BaseApplication;
 
 import java.lang.ref.SoftReference;
 
