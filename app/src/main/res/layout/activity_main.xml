@@ -121,11 +121,11 @@
         android:layout_marginTop="50dp"
         android:visibility="gone"/>
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/iv_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll_http_btns"
-        android:layout_marginTop="100dp"/>
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="200dp"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

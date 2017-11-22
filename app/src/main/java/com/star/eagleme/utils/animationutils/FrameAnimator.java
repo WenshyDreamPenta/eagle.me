@@ -3,15 +3,14 @@ package com.star.eagleme.utils.animationutils;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.widget.ImageView;
 
 import com.star.eagleme.BaseApplication;
+import com.star.eagleme.utils.ImageHelper;
 
 import java.lang.ref.SoftReference;
-
+import java.util.ArrayList;
 
 /**
  * author: star
@@ -20,9 +19,9 @@ import java.lang.ref.SoftReference;
  *                    2.适合做帧数较大的帧动画使用，避免OOM
  * date: 2017/10/24 11:46
  */
-
 public class FrameAnimator
 {
+
     public int FPS;  // 每秒播放帧数，fps = 1/t，t-动画两帧时间间隔
     private Context mContext;
     // 单例
@@ -56,7 +55,9 @@ public class FrameAnimator
      */
     public FramesSequenceAnimation createFramesAnim(ImageView imageView)
     {
-        return new FramesSequenceAnimation(imageView, mProgressAnimFrames, FPS);
+        FramesSequenceAnimation framesSequenceAnimation = new FramesSequenceAnimation(imageView, mProgressAnimFrames, FPS);
+
+        return framesSequenceAnimation;
     }
 
 
@@ -73,9 +74,7 @@ public class FrameAnimator
         private Handler mHandler;
         private int mDelayMillis;
         private OnAnimationStoppedListener mOnAnimationStoppedListener; //播放停止监听
-
-        private Bitmap mBitmap = null;
-        private BitmapFactory.Options mBitmapOptions;//Bitmap管理类，可有效减少Bitmap的OOM问题
+        private ArrayList<Bitmap> bmpList = new ArrayList<Bitmap>();
 
         /**
          * 初始化帧动画
@@ -96,20 +95,12 @@ public class FrameAnimator
             mDelayMillis = 1000 / fps;//帧动画时间间隔，毫秒
 
             //设置第一帧
-            imageView.setImageResource(mFrames[0]);
-
-            // 当图片大小类型相同时进行复用，避免频繁GC
-            Bitmap bmp = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-            int width = bmp.getWidth();
-            int height = bmp.getHeight();
-            Bitmap.Config config = bmp.getConfig();
-            mBitmap = Bitmap.createBitmap(width, height, config);
-            mBitmapOptions = new BitmapFactory.Options();
-
-            //设置Bitmap内存复用
-            mBitmapOptions.inBitmap = mBitmap;//Bitmap复用内存块，类似对象池，避免不必要的内存分配和回收
-            mBitmapOptions.inMutable = true;//解码时返回可变Bitmap
-            mBitmapOptions.inSampleSize = 1;//缩放比例
+	        Bitmap bitmap = ImageHelper.getSoftRefrenceBitmap(mContext,mFrames[0]);
+	        if(bitmap != null)
+	        {
+		        imageView.setImageBitmap(bitmap);
+                bmpList.add(bitmap);
+	        }
 
         }
 
@@ -146,36 +137,23 @@ public class FrameAnimator
                     if (imageView.isShown())
                     {
                         int imageRes = getNextFrame();
-                        if (mBitmap != null && !mShouldRun)
+                        if (mShouldRun)
                         {
-                            if (mOnAnimationStoppedListener != null)
-                            {
-                                mOnAnimationStoppedListener.AnimationStarted();
-                            }
-                            Bitmap bitmap = null;
                             try
                             {
-                                bitmap = BitmapFactory.decodeResource(imageView.getResources(), imageRes, mBitmapOptions);
+	                            Bitmap getBitmap = ImageHelper.getSoftRefrenceBitmap(mContext, imageRes);
+	                            if (getBitmap != null)
+	                            {
+		                            imageView.setImageBitmap(getBitmap);
+		                            bmpList.add(getBitmap);
+	                            }
                             }
                             catch (Exception e)
                             {
                                 e.printStackTrace();
                             }
-                            if (bitmap != null)
-                            {
-                                imageView.setImageBitmap(bitmap);
-                            }
-                            else
-                            {
-                                imageView.setImageResource(imageRes);
-                                mBitmap.recycle();
-                                mBitmap = null;
-                            }
                         }
-                        else
-                        {
-                            imageView.setImageResource(imageRes);
-                        }
+
                     }
 
                 }
@@ -216,6 +194,19 @@ public class FrameAnimator
         {
             this.mOnAnimationStoppedListener = listener;
         }
+
+        public void releaseBitmap() {
+
+            if (bmpList.size() != 0) {
+                for (Bitmap bmp : bmpList) {
+                    bmp.recycle();
+                }
+                bmpList.clear();
+                bmpList = null;
+            }
+
+        }
+
     }
 
     /**
@@ -226,18 +217,17 @@ public class FrameAnimator
      */
     private int[] getData(int resId)
     {
-        TypedArray array = mContext.getResources().obtainTypedArray(resId);
 
+        TypedArray array = mContext.getResources().obtainTypedArray(resId);
         int len = array.length();
         int[] intArray = new int[array.length()];
-
         for (int i = 0; i < len; i++)
         {
             intArray[i] = array.getResourceId(i, 0);
         }
         array.recycle();
-
         return intArray;
+
     }
 
     /**
@@ -245,7 +235,6 @@ public class FrameAnimator
      */
     public interface OnAnimationStoppedListener
     {
-        void AnimationStarted();
         void AnimationStopped();
     }
 }

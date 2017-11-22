@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="logo_anim">
+        <item>@mipmap/animation_00000</item>
+        <item>@mipmap/animation_00001</item>
+        <item>@mipmap/animation_00002</item>
+        <item>@mipmap/animation_00003</item>
+        <item>@mipmap/animation_00004</item>
+        <item>@mipmap/animation_00005</item>
+        <item>@mipmap/animation_00006</item>
+        <item>@mipmap/animation_00007</item>
+        <item>@mipmap/animation_00008</item>
+        <item>@mipmap/animation_00009</item>
+        <item>@mipmap/animation_00010</item>
+        <item>@mipmap/animation_00011</item>
+        <item>@mipmap/animation_00012</item>
+        <item>@mipmap/animation_00013</item>
+        <item>@mipmap/animation_00014</item>
+        <item>@mipmap/animation_00015</item>
+        <item>@mipmap/animation_00016</item>
+        <item>@mipmap/animation_00017</item>
+        <item>@mipmap/animation_00018</item>
+        <item>@mipmap/animation_00019</item>
+        <item>@mipmap/animation_00020</item>
+        <item>@mipmap/animation_00021</item>
+        <item>@mipmap/animation_00022</item>
+        <item>@mipmap/animation_00023</item>
+        <item>@mipmap/animation_00024</item>
+        <item>@mipmap/animation_00025</item>
+        <item>@mipmap/animation_00026</item>
+        <item>@mipmap/animation_00027</item>
+        <item>@mipmap/animation_00028</item>
+        <item>@mipmap/animation_00029</item>
+        <item>@mipmap/animation_00030</item>
+        <item>@mipmap/animation_00031</item>
+        <item>@mipmap/animation_00032</item>
+        <item>@mipmap/animation_00033</item>
+        <item>@mipmap/animation_00034</item>
+        <item>@mipmap/animation_00035</item>
+        <item>@mipmap/animation_00036</item>
+        <item>@mipmap/animation_00037</item>
+        <item>@mipmap/animation_00038</item>
+        <item>@mipmap/animation_00039</item>
+        <item>@mipmap/animation_00040</item>
+        <item>@mipmap/animation_00041</item>
+        <item>@mipmap/animation_00042</item>
+        <item>@mipmap/animation_00043</item>
+        <item>@mipmap/animation_00044</item>
+        <item>@mipmap/animation_00045</item>
+        <item>@mipmap/animation_00046</item>
+        <item>@mipmap/animation_00047</item>
+        <item>@mipmap/animation_00046</item>
+        <item>@mipmap/animation_00045</item>
+        <item>@mipmap/animation_00044</item>
+    </string-array>
+
+    <string-array name="refresh_anim">
+        <item>@mipmap/ic_eaglelive_loading_01</item>
+        <item>@mipmap/ic_eaglelive_loading_02</item>
+        <item>@mipmap/ic_eaglelive_loading_03</item>
+        <item>@mipmap/ic_eaglelive_loading_04</item>
+        <item>@mipmap/ic_eaglelive_loading_05</item>
+        <item>@mipmap/ic_eaglelive_loading_06</item>
+        <item>@mipmap/ic_eaglelive_loading_08</item>
+    </string-array>
+
+</resources>

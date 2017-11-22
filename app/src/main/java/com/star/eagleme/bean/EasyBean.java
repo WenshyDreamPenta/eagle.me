@@ -13,6 +13,10 @@ public class EasyBean
         this.text = text;
         setSelected(isSelected);
     }
+    public EasyBean()
+    {
+
+    }
     public boolean isSelected() {
         return isSelected;
     }

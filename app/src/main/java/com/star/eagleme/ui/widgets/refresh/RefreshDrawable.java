@@ -14,7 +14,7 @@ public abstract class RefreshDrawable extends Drawable implements Drawable.Callb
 
     private PullRefreshLayout mRefreshLayout;
 
-    public RefreshDrawable(Context context, PullRefreshLayout layout)
+    public RefreshDrawable(PullRefreshLayout layout)
     {
         mRefreshLayout = layout;
     }

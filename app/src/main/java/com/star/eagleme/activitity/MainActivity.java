@@ -7,17 +7,21 @@ import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.star.eagleme.R;
+import com.star.eagleme.bean.EasyBean;
 import com.star.eagleme.socket.client.ConnectionClient;
 import com.star.eagleme.socket.protocol.DataAckProtocol;
 import com.star.eagleme.socket.protocol.DataProtocol;
 import com.star.eagleme.socket.request.RequestCallBack;
+import com.star.eagleme.utils.animationutils.FrameAnimator;
 import com.star.eagleme.utils.logutil.ManageLog;
 
+import java.lang.reflect.Method;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -46,19 +50,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	private TextView tvclose;
 	private TextView tvconnect;
 	private TextView tvrefresh;
-	private ImageView imageView;
+	private SimpleDraweeView imageView;
+
+	public static Class<EasyBean> cls;
 
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		Fresco.initialize(this);
 		setContentView(R.layout.activity_main);
 		initViews();
 		initThreadExcute();
+
 		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
 		StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
-
+		FrameAnimator.FramesSequenceAnimation animation = FrameAnimator.getInstance(R.array.logo_anim ,24).createFramesAnim(imageView);
+		animation.start();
 		//pointAnimView.setRadius(20f);
 		final int resid = R.mipmap.ic_eaglelive_loading_01;
 		Subscription subscribe = Observable.create(new Observable.OnSubscribe<Drawable>()
@@ -144,9 +153,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		tvclose = (TextView) findViewById(R.id.tv_close);
 		tvconnect = (TextView) findViewById(R.id.tv_connect);
 		tvrefresh = (TextView) findViewById(R.id.tv_refresh);
-		imageView = (ImageView) findViewById(R.id.iv_view);
+		imageView = (SimpleDraweeView) findViewById(R.id.iv_view);
 
 		// pointAnimView = (PointAnimView) findViewById(R.id.pv_animview);
+		initReflect();
 
 		etSend.setOnClickListener(this);
 		tvclose.setOnClickListener(this);
@@ -183,6 +193,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		};
 
 	}
+	//java反射相关
+	public void initReflect()
+	{
+		try
+		{
 
+			// 使用invoke调用方法，并且获取方法的返回值，需要传入一个方法所在类的对象，new Object[]
+			// {"Kai"}是需要传入的参数，与上面的String.class相对应
+			Class<?> easyBeanClass = Class.forName("com.star.eagleme.bean.EasyBean");
+			Object book = easyBeanClass.newInstance();
+
+			Method method = easyBeanClass.getDeclaredMethod("getText");
+			Method setMethod = easyBeanClass.getDeclaredMethod("setText", String.class);
+			setMethod.invoke(book,new Object[] { "Kai" });
+			method.invoke(book);
+			method.setAccessible(true);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 
 }
