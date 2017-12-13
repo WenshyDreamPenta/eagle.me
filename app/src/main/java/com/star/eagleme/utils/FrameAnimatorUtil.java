@@ -1,4 +1,4 @@
-package com.star.eagleme.utils.animationutils;
+package com.star.eagleme.utils;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.widget.ImageView;
 
 import com.star.eagleme.BaseApplication;
-import com.star.eagleme.utils.ImageHelper;
 
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
@@ -19,13 +18,13 @@ import java.util.ArrayList;
  *                    2.适合做帧数较大的帧动画使用，避免OOM
  * date: 2017/10/24 11:46
  */
-public class FrameAnimator
+public class FrameAnimatorUtil
 {
 
     public int FPS;  // 每秒播放帧数，fps = 1/t，t-动画两帧时间间隔
     private Context mContext;
     // 单例
-    private static FrameAnimator mInstance;
+    private static FrameAnimatorUtil mInstance;
 
     // 从xml中读取资源ID数组
     private int[] mProgressAnimFrames;
@@ -36,11 +35,11 @@ public class FrameAnimator
      * @param fps   帧数
      * @return
      */
-    public static FrameAnimator getInstance(int resId, int fps)
+    public static FrameAnimatorUtil getInstance(int resId, int fps)
     {
         if (mInstance == null)
         {
-            mInstance = new FrameAnimator();
+            mInstance = new FrameAnimatorUtil();
         }
         mInstance.FPS = fps;
         mInstance.mContext = BaseApplication.getAppContext();
@@ -95,7 +94,7 @@ public class FrameAnimator
             mDelayMillis = 1000 / fps;//帧动画时间间隔，毫秒
 
             //设置第一帧
-	        Bitmap bitmap = ImageHelper.getSoftRefrenceBitmap(mContext,mFrames[0]);
+	        Bitmap bitmap = BitmapsUtil.getSoftRefrenceBitmap(mContext,mFrames[0]);
 	        if(bitmap != null)
 	        {
 		        imageView.setImageBitmap(bitmap);
@@ -141,7 +140,7 @@ public class FrameAnimator
                         {
                             try
                             {
-	                            Bitmap getBitmap = ImageHelper.getSoftRefrenceBitmap(mContext, imageRes);
+	                            Bitmap getBitmap = BitmapsUtil.getSoftRefrenceBitmap(mContext, imageRes);
 	                            if (getBitmap != null)
 	                            {
 		                            imageView.setImageBitmap(getBitmap);

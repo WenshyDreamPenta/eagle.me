@@ -9,7 +9,7 @@ import android.os.Handler;
 
 import com.star.eagleme.R;
 import com.star.eagleme.utils.DimenUtils;
-import com.star.eagleme.utils.ImageHelper;
+import com.star.eagleme.utils.BitmapsUtil;
 
 
 /**
@@ -96,7 +96,7 @@ public class RefreshAnimationDrawable extends RefreshDrawable implements Runnabl
         int num = (int) (System.currentTimeMillis() / ANIMINATION_DELAY % size);
         final int saveCount = canvas.save();
         canvas.translate(0, mOffset + DimenUtils.dp2px(getContext(), 40));
-        Bitmap bitmap = ImageHelper.getSoftRefrenceBitmap(getContext(), bitmaps[num]);
+        Bitmap bitmap = BitmapsUtil.getSoftRefrenceBitmap(getContext(), bitmaps[num]);
         if(bitmap == null)
         {
         	return;

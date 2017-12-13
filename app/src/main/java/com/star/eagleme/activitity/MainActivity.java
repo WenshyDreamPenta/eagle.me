@@ -6,19 +6,23 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.jaeger.library.StatusBarUtil;
 import com.star.eagleme.R;
 import com.star.eagleme.bean.EasyBean;
 import com.star.eagleme.socket.client.ConnectionClient;
 import com.star.eagleme.socket.protocol.DataAckProtocol;
 import com.star.eagleme.socket.protocol.DataProtocol;
 import com.star.eagleme.socket.request.RequestCallBack;
-import com.star.eagleme.utils.animationutils.FrameAnimator;
+import com.star.eagleme.ui.widgets.animview.PointAnimView;
+import com.star.eagleme.utils.FrameAnimatorUtil;
 import com.star.eagleme.utils.logutil.ManageLog;
 
 import java.lang.reflect.Method;
@@ -51,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	private TextView tvconnect;
 	private TextView tvrefresh;
 	private SimpleDraweeView imageView;
+	private PointAnimView pointAnimView;
 
 	public static Class<EasyBean> cls;
 
@@ -61,13 +66,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		super.onCreate(savedInstanceState);
 		Fresco.initialize(this);
 		setContentView(R.layout.activity_main);
+		StatusBarUtil.setTransparent(this);
 		initViews();
 		initThreadExcute();
 
-		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
-		StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
-		FrameAnimator.FramesSequenceAnimation animation = FrameAnimator.getInstance(R.array.logo_anim ,24).createFramesAnim(imageView);
+		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads()
+				.detectDiskWrites()
+				.detectNetwork()
+				.penaltyLog()
+				.build());
+		StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects()
+				.detectLeakedClosableObjects()
+				.penaltyLog()
+				.penaltyDeath()
+				.build());
+		FrameAnimatorUtil.FramesSequenceAnimation animation = FrameAnimatorUtil.getInstance(R.array.logo_anim, 24)
+				.createFramesAnim(imageView);
 		animation.start();
+		//imageView.setVisibility(View.GONE);
+		//pointAnimView.setVisibility(View.VISIBLE);
 		//pointAnimView.setRadius(20f);
 		final int resid = R.mipmap.ic_eaglelive_loading_01;
 		Subscription subscribe = Observable.create(new Observable.OnSubscribe<Drawable>()
@@ -155,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		tvrefresh = (TextView) findViewById(R.id.tv_refresh);
 		imageView = (SimpleDraweeView) findViewById(R.id.iv_view);
 
-		// pointAnimView = (PointAnimView) findViewById(R.id.pv_animview);
+		pointAnimView = (PointAnimView) findViewById(R.id.pv_animview);
 		initReflect();
 
 		etSend.setOnClickListener(this);
@@ -163,11 +180,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		tvconnect.setOnClickListener(this);
 		tvget.setOnClickListener(this);
 		tvrefresh.setOnClickListener(this);
+		gestureDetector = new GestureDetector(MainActivity.this, onGestureListener);
 	}
 
 	private void initThreadExcute()
 	{
-		threadPoolExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+		threadPoolExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS,
+				new LinkedBlockingQueue<Runnable>());
 		requestCallBack = new RequestCallBack()
 		{
 
@@ -193,6 +212,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		};
 
 	}
+
 	//java反射相关
 	public void initReflect()
 	{
@@ -206,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 			Method method = easyBeanClass.getDeclaredMethod("getText");
 			Method setMethod = easyBeanClass.getDeclaredMethod("setText", String.class);
-			setMethod.invoke(book,new Object[] { "Kai" });
+			setMethod.invoke(book, new Object[]{"Kai"});
 			method.invoke(book);
 			method.setAccessible(true);
 		}
@@ -216,4 +236,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		}
 	}
 
+	private GestureDetector gestureDetector;
+	private GestureDetector.OnGestureListener onGestureListener = new GestureDetector.SimpleOnGestureListener()
+	{
+		@Override
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+		{
+			float minMove = 120;         //最小滑动距离
+			float minVelocity = 0;      //最小滑动速度
+			float beginX = e1.getX();
+			float endX = e2.getX();
+			float beginY = e1.getY();
+			float endY = e2.getY();
+
+			if (beginX - endX > minMove && Math.abs(velocityX) > minVelocity)
+			{   //左滑
+			}
+			else if (endX - beginX > minMove && Math.abs(velocityX) > minVelocity)
+			{   //右滑
+			}
+			else if (beginY - endY > minMove && Math.abs(velocityY) > minVelocity)
+			{
+				Toast.makeText(getApplicationContext(), velocityX + "上滑", Toast.LENGTH_SHORT).show();//上滑
+			}
+			else if (endY - beginY > minMove && Math.abs(velocityY) > minVelocity)
+			{   //下滑
+				Toast.makeText(getApplicationContext(), velocityX + "下滑", Toast.LENGTH_SHORT).show();
+			}
+			return true;
+		}
+	};
+
+	public boolean onTouchEvent(MotionEvent event)
+	{
+		return gestureDetector.onTouchEvent(event);
+	}
 }

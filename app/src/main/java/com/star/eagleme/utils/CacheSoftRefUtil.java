@@ -18,7 +18,7 @@ import java.util.Map;
  * Date: 2017/10/25.
  */
 
-public class CacheSoftRef
+public class CacheSoftRefUtil
 {
     //首先定义一个HashMap,保存引用对象
     private Map<String, SoftReference<Bitmap>> imageCache = new HashMap<String, SoftReference<Bitmap>>();

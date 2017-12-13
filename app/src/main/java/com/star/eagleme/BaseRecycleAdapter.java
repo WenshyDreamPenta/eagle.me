@@ -39,7 +39,6 @@ public abstract class BaseRecycleAdapter<VH extends ViewHolder> extends Adapter<
     @Override
     public int getItemCount()
     {
-        // TODO Auto-generated method stub
         return mDatas.size();
     }
 

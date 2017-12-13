@@ -18,7 +18,7 @@ import java.lang.ref.SoftReference;
 /**
  * Created by Emiya on 2016/6/2.
  */
-public class ImageHelper
+public class BitmapsUtil
 {
 
 	/**
@@ -318,7 +318,7 @@ public class ImageHelper
 			int w = src.getWidth();
 			int h = src.getHeight();
 
-			//根据bitmap缩放水印图片
+			//根据bitmap缩放水印图片eeeee
 			float w1 = w / 5;
 			float h1 = (float) (w1 / 2.782);
 			//获取原始水印图片的宽、高
