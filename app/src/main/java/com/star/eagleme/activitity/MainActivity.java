@@ -21,6 +21,7 @@ import com.star.eagleme.socket.client.ConnectionClient;
 import com.star.eagleme.socket.protocol.DataAckProtocol;
 import com.star.eagleme.socket.protocol.DataProtocol;
 import com.star.eagleme.socket.request.RequestCallBack;
+import com.star.eagleme.ui.widgets.animview.FavorAnimLayout;
 import com.star.eagleme.ui.widgets.animview.PointAnimView;
 import com.star.eagleme.utils.FrameAnimatorUtil;
 import com.star.eagleme.utils.logutil.ManageLog;
@@ -54,8 +55,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	private TextView tvclose;
 	private TextView tvconnect;
 	private TextView tvrefresh;
+	private TextView tvsinAnim;
 	private SimpleDraweeView imageView;
 	private PointAnimView pointAnimView;
+	private FavorAnimLayout favorAnimLayout;
 
 	public static Class<EasyBean> cls;
 
@@ -83,9 +86,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		FrameAnimatorUtil.FramesSequenceAnimation animation = FrameAnimatorUtil.getInstance(R.array.logo_anim, 24)
 				.createFramesAnim(imageView);
 		animation.start();
-		//imageView.setVisibility(View.GONE);
-		//pointAnimView.setVisibility(View.VISIBLE);
-		//pointAnimView.setRadius(20f);
+		imageView.setVisibility(View.GONE);
+		/*pointAnimView.setVisibility(View.VISIBLE);
+		pointAnimView.setRadius(20f);*/
+		favorAnimLayout.setVisibility(View.VISIBLE);
 		final int resid = R.mipmap.ic_eaglelive_loading_01;
 		Subscription subscribe = Observable.create(new Observable.OnSubscribe<Drawable>()
 		{
@@ -157,6 +161,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				Intent intent = new Intent(this, RefreshActivity.class);
 				startActivity(intent);
 				break;
+			case R.id.tv_sin:
+				favorAnimLayout.addItem();
+				break;
 			default:
 				break;
 		}
@@ -170,9 +177,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		tvclose = (TextView) findViewById(R.id.tv_close);
 		tvconnect = (TextView) findViewById(R.id.tv_connect);
 		tvrefresh = (TextView) findViewById(R.id.tv_refresh);
+		tvsinAnim = (TextView)  findViewById(R.id.tv_sin);
 		imageView = (SimpleDraweeView) findViewById(R.id.iv_view);
 
 		pointAnimView = (PointAnimView) findViewById(R.id.pv_animview);
+		favorAnimLayout = (FavorAnimLayout) findViewById(R.id.fa_animview);
 		initReflect();
 
 		etSend.setOnClickListener(this);
@@ -180,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		tvconnect.setOnClickListener(this);
 		tvget.setOnClickListener(this);
 		tvrefresh.setOnClickListener(this);
+		tvsinAnim.setOnClickListener(this);
 		gestureDetector = new GestureDetector(MainActivity.this, onGestureListener);
 	}
 

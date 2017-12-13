@@ -39,26 +39,29 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/ll_text"
         android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_connect"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_centerHorizontal="true"
             android:background="#000"
             android:gravity="center"
             android:text="Connect"
+            android:layout_weight="1"
             android:textColor="#fff"
             android:textSize="16sp"/>
 
         <TextView
             android:id="@+id/tv_close"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="15dp"
             android:background="#000"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="Close"
             android:textColor="#fff"
@@ -66,11 +69,12 @@
 
         <TextView
             android:id="@+id/tv_send"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="15dp"
             android:background="#000"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="Send"
             android:textColor="#fff"
@@ -84,6 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/ll_btns"
         android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:layout_marginTop="15dp"
         android:orientation="horizontal">
 
@@ -94,6 +99,7 @@
             android:layout_centerHorizontal="true"
             android:background="#000"
             android:gravity="center"
+            android:layout_weight="1"
             android:text="Get"
             android:textColor="#fff"
             android:textSize="16sp"/>
@@ -105,8 +111,21 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="15dp"
             android:background="#000"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="Refresh"
+            android:textColor="#fff"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/tv_sin"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="15dp"
+            android:background="#000"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="SinAnim"
             android:textColor="#fff"
             android:textSize="16sp"/>
 
@@ -118,6 +137,13 @@
         android:id="@+id/pv_animview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/ll_btns"
+        android:layout_marginTop="50dp"
+        android:visibility="gone"/>
+    <com.star.eagleme.ui.widgets.animview.FavorAnimLayout
+        android:id="@+id/fa_animview"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_below="@id/ll_btns"
         android:layout_marginTop="50dp"
         android:visibility="gone"/>
