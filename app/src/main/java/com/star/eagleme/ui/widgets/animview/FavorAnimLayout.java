@@ -3,14 +3,11 @@ package com.star.eagleme.ui.widgets.animview;
 import android.animation.AnimatorSet;
 import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnticipateInterpolator;
 import android.view.animation.BounceInterpolator;
@@ -27,7 +24,7 @@ import java.util.Random;
 
 /**
  * Created by star on 2017/10/10.
- * @description:
+ * @description: cos曲线配合imageview
  */
 public class FavorAnimLayout extends RelativeLayout
 {
@@ -38,10 +35,13 @@ public class FavorAnimLayout extends RelativeLayout
     private AnimatorSet animSet;
     private TimeInterpolator interpolatorType = new LinearInterpolator();
 	private Random random = new Random();
+	//图片大小
+	private int dHeight;
+	private int dWidth;
+	//图片数组
 	private int[] mDrawbleSrc = new int[]{
 			R.mipmap.ic_live_praise_01, R.mipmap.ic_live_praise_02, R.mipmap.ic_live_praise_03, R.mipmap.ic_live_praise_04,
 			R.mipmap.ic_live_praise_05, R.mipmap.ic_live_praise_06, R.mipmap.ic_live_praise_07,R.mipmap.ic_live_praise_08};
-
     public FavorAnimLayout(Context context)
     {
         super(context);
@@ -57,25 +57,25 @@ public class FavorAnimLayout extends RelativeLayout
     {
 	    //初始化显示的图片
 	    Drawable drawable = getResources().getDrawable(mDrawbleSrc[0]);
-	    int dHeight = drawable.getIntrinsicHeight();
-	    int dWidth = drawable.getIntrinsicWidth();
+	    dHeight = drawable.getIntrinsicHeight();
+	    dWidth = drawable.getIntrinsicWidth();
 
 	    //底部 并且 水平居中
 	    lp = new LayoutParams(dWidth, dHeight);
 	    lp.addRule(CENTER_HORIZONTAL, TRUE);//这里的TRUE 要注意 不是true
 	    lp.addRule(ALIGN_PARENT_BOTTOM, TRUE);
     }
+
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
 	{
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		mWidth = getMeasuredWidth();
 		mHeight = getMeasuredHeight();
-		Log.d("favor", "onMeasure: " + mWidth +";" + mHeight);
 	}
 
-
-	public void addItem()
+	//添加View
+	public void addSinAnim()
 	{
 		ImageView imageView = new ImageView(getContext());
 		imageView.setLayoutParams(lp);
@@ -84,11 +84,11 @@ public class FavorAnimLayout extends RelativeLayout
 		startSinAnimation(imageView);
 	}
 
+	//开启动画
 	public void startSinAnimation(final ImageView view)
 	{
 		Point startP = new Point(0, 0);
-		Point endP = new Point(mWidth, mHeight);
-		Log.d("favor", "startSinAnimation: " + mWidth +";" + mHeight);
+		Point endP = new Point(mWidth - dWidth, mHeight);
 		final ValueAnimator valueAnimator = ValueAnimator.ofObject(new PointSinEvaluator(), startP, endP);
 		valueAnimator.setRepeatCount(-1);
 		valueAnimator.setRepeatMode(ValueAnimator.REVERSE);
@@ -102,14 +102,14 @@ public class FavorAnimLayout extends RelativeLayout
 				view.setX(currentPoint.x);
 				view.setY(currentPoint.y);
 				// 这里顺便做一个alpha动画
-				view.setAlpha(1 - animation.getAnimatedFraction());
+			//	view.setAlpha(1 - animation.getAnimatedFraction());
 
-				postInvalidate();
 			}
 		});
 		animSet = new AnimatorSet();
 		animSet.play(valueAnimator);
 		animSet.setDuration(5000);
+		setInterpolatorType(5);
 		animSet.setInterpolator(interpolatorType);
 		animSet.start();
 
@@ -147,7 +147,6 @@ public class FavorAnimLayout extends RelativeLayout
 		}
 	}
 
-	@TargetApi(Build.VERSION_CODES.KITKAT)
 	public void pauseAnimation()
 	{
 		if (animSet != null)

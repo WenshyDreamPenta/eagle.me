@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				startActivity(intent);
 				break;
 			case R.id.tv_sin:
-				favorAnimLayout.addItem();
+				favorAnimLayout.addSinAnim();
 				break;
 			default:
 				break;

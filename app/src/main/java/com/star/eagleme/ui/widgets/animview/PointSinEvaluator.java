@@ -2,6 +2,7 @@ package com.star.eagleme.ui.widgets.animview;
 
 import android.animation.TypeEvaluator;
 import android.graphics.Point;
+import android.util.Log;
 
 /**
  * Created by star on 2017/10/10.
@@ -17,6 +18,7 @@ public class PointSinEvaluator implements TypeEvaluator
         int x = (int) (startPoint.x + fraction * (endPoint.x - startPoint.x));
         int y = (int) (Math.cos(x * Math.PI / 180) * 100) + endPoint.y / 2;
         Point point = new Point(x, y);
+	    Log.d("PointSinEvaluator", "evaluate: x:" + x + "; y:" + y );
 
         return point;
     }

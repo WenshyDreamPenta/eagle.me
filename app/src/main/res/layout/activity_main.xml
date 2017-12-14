@@ -142,8 +142,8 @@
         android:visibility="gone"/>
     <com.star.eagleme.ui.widgets.animview.FavorAnimLayout
         android:id="@+id/fa_animview"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@id/ll_btns"
         android:layout_marginTop="50dp"
         android:visibility="gone"/>
