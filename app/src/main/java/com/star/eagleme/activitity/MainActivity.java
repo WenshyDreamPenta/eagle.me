@@ -72,56 +72,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		StatusBarUtil.setTransparent(this);
 		initViews();
 		initThreadExcute();
+		initStrictMode();
 
-		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads()
-				.detectDiskWrites()
-				.detectNetwork()
-				.penaltyLog()
-				.build());
-		StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects()
-				.detectLeakedClosableObjects()
-				.penaltyLog()
-				.penaltyDeath()
-				.build());
-		FrameAnimatorUtil.FramesSequenceAnimation animation = FrameAnimatorUtil.getInstance(R.array.logo_anim, 24)
-				.createFramesAnim(imageView);
-		animation.start();
+		FrameAnimatorUtil.getInstance(R.array.logo_anim, 24).createFramesAnim(imageView).start();
 		imageView.setVisibility(View.GONE);
 		/*pointAnimView.setVisibility(View.VISIBLE);
 		pointAnimView.setRadius(20f);*/
 		favorAnimLayout.setVisibility(View.VISIBLE);
-		final int resid = R.mipmap.ic_eaglelive_loading_01;
-		Subscription subscribe = Observable.create(new Observable.OnSubscribe<Drawable>()
-		{
-
-			@Override
-			public void call(Subscriber<? super Drawable> subscriber)
-			{
-				Drawable drawable = getTheme().getDrawable(resid);
-				subscriber.onNext(drawable);
-				subscriber.onCompleted();
-			}
-		}).subscribe(new Observer<Drawable>()
-		{
-			@Override
-			public void onCompleted()
-			{
-
-			}
-
-			@Override
-			public void onError(Throwable e)
-			{
-
-			}
-
-			@Override
-			public void onNext(Drawable drawable)
-			{
-
-			}
-		});
-		subscribe.unsubscribe();
 
 	}
 
@@ -277,8 +234,60 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		}
 	};
 
+	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
 		return gestureDetector.onTouchEvent(event);
+	}
+
+	public void initStrictMode()
+	{
+		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads()
+				.detectDiskWrites()
+				.detectNetwork()
+				.penaltyLog()
+				.build());
+		StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects()
+				.detectLeakedClosableObjects()
+				.penaltyLog()
+				.penaltyDeath()
+				.build());
+	}
+
+	public void testSubscription()
+	{
+		final int resid = R.mipmap.ic_eaglelive_loading_01;
+		Subscription subscribe = Observable.create(new Observable.OnSubscribe<Drawable>()
+		{
+
+			@Override
+			public void call(Subscriber<? super Drawable> subscriber)
+			{
+				Drawable drawable = getTheme().getDrawable(resid);
+				subscriber.onNext(drawable);
+				subscriber.onCompleted();
+			}
+		}).subscribe(new Observer<Drawable>()
+		{
+			@Override
+			public void onCompleted()
+			{
+
+			}
+
+			@Override
+			public void onError(Throwable e)
+			{
+
+			}
+
+			@Override
+			public void onNext(Drawable drawable)
+			{
+
+			}
+		});
+		subscribe.unsubscribe();
+
 	}
 }
