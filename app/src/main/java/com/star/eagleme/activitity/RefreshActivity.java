@@ -7,16 +7,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.star.eagleme.BaseApplication;
 import com.star.eagleme.R;
 import com.star.eagleme.adapter.EasyAdapter;
 import com.star.eagleme.bean.EasyBean;
 import com.star.eagleme.ui.divider.RecyclerViewDivider;
-import com.star.eagleme.BaseApplication;
 import com.star.eagleme.ui.widgets.refresh.PullRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Route(path = "/activity/refresh")
 public class RefreshActivity extends AppCompatActivity
 {
     private PullRefreshLayout pullRefreshLayout;

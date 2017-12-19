@@ -1,6 +1,5 @@
 package com.star.eagleme.activitity;
 
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -12,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jaeger.library.StatusBarUtil;
@@ -115,8 +115,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			case R.id.tv_get:
 				break;
 			case R.id.tv_refresh:
-				Intent intent = new Intent(this, RefreshActivity.class);
-				startActivity(intent);
+				//使用ARouter进行跳转
+				ARouter.getInstance().build("/activity/refresh").navigation();
 				break;
 			case R.id.tv_sin:
 				favorAnimLayout.addSinAnim();

@@ -1,14 +1,13 @@
-package com.star.eagleme; /**
- * Created by star on 2017/8/22.
- *
- * @description:
- */
+package com.star.eagleme;
 
 import android.content.Context;
 import android.support.multidex.MultiDexApplication;
-
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.facebook.stetho.Stetho;
 
+/**
+ * Created by star on 2017/8/22.
+ */
 public class BaseApplication extends MultiDexApplication
 {
     private static Context mContext = null;
@@ -18,27 +17,10 @@ public class BaseApplication extends MultiDexApplication
     {
         super.onCreate();
         mContext = getApplicationContext();
-        //设置Stetho
-        Stetho.initializeWithDefaults(mContext);
 
-    }
+	    ARouter.init(this); //设置ARouter
+        Stetho.initializeWithDefaults(mContext);//设置Stetho
 
-    @Override
-    public void onTerminate()
-    {
-        super.onTerminate();
-    }
-
-    @Override
-    public void onTrimMemory(int level)
-    {
-        super.onTrimMemory(level);
-    }
-
-    @Override
-    public void onLowMemory()
-    {
-        super.onLowMemory();
     }
 
     public static Context getAppContext() {
