@@ -128,17 +128,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 	private void initViews()
 	{
-		etText = (TextView) findViewById(R.id.et_text);
-		etSend = (TextView) findViewById(R.id.tv_send);
-		tvget = (TextView) findViewById(R.id.tv_get);
-		tvclose = (TextView) findViewById(R.id.tv_close);
-		tvconnect = (TextView) findViewById(R.id.tv_connect);
-		tvrefresh = (TextView) findViewById(R.id.tv_refresh);
-		tvsinAnim = (TextView)  findViewById(R.id.tv_sin);
-		imageView = (SimpleDraweeView) findViewById(R.id.iv_view);
+		etText = findViewById(R.id.et_text);
+		etSend = findViewById(R.id.tv_send);
+		tvget = findViewById(R.id.tv_get);
+		tvclose = findViewById(R.id.tv_close);
+		tvconnect = findViewById(R.id.tv_connect);
+		tvrefresh = findViewById(R.id.tv_refresh);
+		tvsinAnim = findViewById(R.id.tv_sin);
+		imageView = findViewById(R.id.iv_view);
 
-		pointAnimView = (PointAnimView) findViewById(R.id.pv_animview);
-		favorAnimLayout = (FavorAnimLayout) findViewById(R.id.fa_animview);
+		pointAnimView = findViewById(R.id.pv_animview);
+		favorAnimLayout = findViewById(R.id.fa_animview);
 		initReflect();
 
 		etSend.setOnClickListener(this);
