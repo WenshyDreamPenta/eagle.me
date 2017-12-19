@@ -31,10 +31,10 @@ public class RefreshActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_refresh);
-        pullRefreshLayout = (PullRefreshLayout) findViewById(R.id.crl);
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv);
+        pullRefreshLayout = findViewById(R.id.crl);
+        mRecyclerView = findViewById(R.id.rv);
 
-        reportResons = new ArrayList<EasyBean>();
+        reportResons = new ArrayList<>();
         reportResons.add(new EasyBean("one", false));
         reportResons.add(new EasyBean("two", false));
         reportResons.add(new EasyBean("three", false));

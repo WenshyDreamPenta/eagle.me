@@ -13,6 +13,9 @@ public class SchameFilterActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 
 		Uri uri = getIntent().getData();
+		if(uri == null){
+			return;
+		}
 		ARouter.getInstance().build(uri).navigation();
 		finish();
 	}
