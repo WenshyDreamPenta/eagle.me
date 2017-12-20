@@ -43,8 +43,8 @@ import rx.Subscription;
  * @date 2017/10/18
  */
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener
-{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
 	private ThreadPoolExecutor threadPoolExecutor;
 	private ConnectionClient connClinet;
 	private RequestCallBack requestCallBack;
@@ -64,13 +64,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 	@Override
-	protected void onCreate(@Nullable Bundle savedInstanceState)
-	{
+	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Fresco.initialize(this);
 		setContentView(R.layout.activity_main);
 		StatusBarUtil.setTransparent(this);
 		initViews();
+		initEvents();
 		initThreadExcute();
 		initStrictMode();
 
@@ -83,14 +83,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	}
 
 	@Override
-	public void onClick(View v)
-	{
-		switch (v.getId())
-		{
+	public void onClick(View v) {
+		switch (v.getId()) {
 			case R.id.tv_send:
 				String sendText = etText.getText().toString();
-				if (sendText != null && !sendText.equals(""))
-				{
+				if (sendText != null && !sendText.equals("")) {
 					DataProtocol data = new DataProtocol();
 					data.setData(sendText);
 					data.setDtype(1);
@@ -100,12 +97,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				}
 				break;
 			case R.id.tv_close:
-				if (connClinet != null)
-				{
+				if (connClinet != null) {
 					connClinet.closeConnect();
 				}
-				else
-				{
+				else {
 					Toast.makeText(this, "please connect server!", Toast.LENGTH_LONG);
 				}
 				break;
@@ -126,20 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		}
 	}
 
-	private void initViews()
-	{
-		etText = findViewById(R.id.et_text);
-		etSend = findViewById(R.id.tv_send);
-		tvget = findViewById(R.id.tv_get);
-		tvclose = findViewById(R.id.tv_close);
-		tvconnect = findViewById(R.id.tv_connect);
-		tvrefresh = findViewById(R.id.tv_refresh);
-		tvsinAnim = findViewById(R.id.tv_sin);
-		imageView = findViewById(R.id.iv_view);
-
-		pointAnimView = findViewById(R.id.pv_animview);
-		favorAnimLayout = findViewById(R.id.fa_animview);
-		initReflect();
+	private void initEvents() {
 
 		etSend.setOnClickListener(this);
 		tvclose.setOnClickListener(this);
@@ -148,32 +130,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		tvrefresh.setOnClickListener(this);
 		tvsinAnim.setOnClickListener(this);
 		gestureDetector = new GestureDetector(MainActivity.this, onGestureListener);
+		initReflect();
+
 	}
 
-	private void initThreadExcute()
-	{
+	private void initViews() {
+		etText = findViewById(R.id.et_text);
+		etSend = findViewById(R.id.tv_send);
+		tvget = findViewById(R.id.tv_get);
+		tvclose = findViewById(R.id.tv_close);
+		tvconnect = findViewById(R.id.tv_connect);
+		tvrefresh = findViewById(R.id.tv_refresh);
+		tvsinAnim = findViewById(R.id.tv_sin);
+		imageView = findViewById(R.id.iv_view);
+		pointAnimView = findViewById(R.id.pv_animview);
+		favorAnimLayout = findViewById(R.id.fa_animview);
+	}
+
+	private void initThreadExcute() {
 		threadPoolExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS,
 				new LinkedBlockingQueue<Runnable>());
-		requestCallBack = new RequestCallBack()
-		{
+		requestCallBack = new RequestCallBack() {
 
 			@Override
-			public void onSuccess(Object msg)
-			{
-				if (msg instanceof DataAckProtocol)
-				{
+			public void onSuccess(Object msg) {
+				if (msg instanceof DataAckProtocol) {
 					ManageLog.D("DataAckProtocol-msg", ((DataAckProtocol) msg).getUnused());
 				}
-				else
-				{
+				else {
 					ManageLog.D("msg", msg.toString());
 				}
 
 			}
 
 			@Override
-			public void onFailed(int errorCode, String msg)
-			{
+			public void onFailed(int errorCode, String msg) {
 
 			}
 		};
@@ -181,10 +172,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	}
 
 	//java反射相关
-	public void initReflect()
-	{
-		try
-		{
+	public void initReflect() {
+		try {
 
 			// 使用invoke调用方法，并且获取方法的返回值，需要传入一个方法所在类的对象，new Object[]
 			// {"Kai"}是需要传入的参数，与上面的String.class相对应
@@ -197,18 +186,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			method.invoke(book);
 			method.setAccessible(true);
 		}
-		catch (Exception e)
-		{
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	private GestureDetector gestureDetector;
-	private GestureDetector.OnGestureListener onGestureListener = new GestureDetector.SimpleOnGestureListener()
-	{
+	private GestureDetector.OnGestureListener onGestureListener = new GestureDetector.SimpleOnGestureListener() {
 		@Override
-		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
-		{
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 			float minMove = 120;         //最小滑动距离
 			float minVelocity = 0;      //最小滑动速度
 			float beginX = e1.getX();
@@ -216,18 +202,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			float beginY = e1.getY();
 			float endY = e2.getY();
 
-			if (beginX - endX > minMove && Math.abs(velocityX) > minVelocity)
-			{   //左滑
+			if (beginX - endX > minMove && Math.abs(velocityX) > minVelocity) {   //左滑
 			}
-			else if (endX - beginX > minMove && Math.abs(velocityX) > minVelocity)
-			{   //右滑
+			else if (endX - beginX > minMove && Math.abs(velocityX) > minVelocity) {   //右滑
 			}
-			else if (beginY - endY > minMove && Math.abs(velocityY) > minVelocity)
-			{
+			else if (beginY - endY > minMove && Math.abs(velocityY) > minVelocity) {
 				Toast.makeText(getApplicationContext(), velocityX + "上滑", Toast.LENGTH_SHORT).show();//上滑
 			}
-			else if (endY - beginY > minMove && Math.abs(velocityY) > minVelocity)
-			{   //下滑
+			else if (endY - beginY > minMove && Math.abs(velocityY) > minVelocity) {   //下滑
 				Toast.makeText(getApplicationContext(), velocityX + "下滑", Toast.LENGTH_SHORT).show();
 			}
 			return true;
@@ -235,13 +217,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	};
 
 	@Override
-	public boolean onTouchEvent(MotionEvent event)
-	{
+	public boolean onTouchEvent(MotionEvent event) {
 		return gestureDetector.onTouchEvent(event);
 	}
 
-	public void initStrictMode()
-	{
+	public void initStrictMode() {
 		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads()
 				.detectDiskWrites()
 				.detectNetwork()
@@ -254,36 +234,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				.build());
 	}
 
-	public void testSubscription()
-	{
+	public void testSubscription() {
 		final int resid = R.mipmap.ic_eaglelive_loading_01;
-		Subscription subscribe = Observable.create(new Observable.OnSubscribe<Drawable>()
-		{
+		Subscription subscribe = Observable.create(new Observable.OnSubscribe<Drawable>() {
 
 			@Override
-			public void call(Subscriber<? super Drawable> subscriber)
-			{
+			public void call(Subscriber<? super Drawable> subscriber) {
 				Drawable drawable = getTheme().getDrawable(resid);
 				subscriber.onNext(drawable);
 				subscriber.onCompleted();
 			}
-		}).subscribe(new Observer<Drawable>()
-		{
+		}).subscribe(new Observer<Drawable>() {
 			@Override
-			public void onCompleted()
-			{
+			public void onCompleted() {
 
 			}
 
 			@Override
-			public void onError(Throwable e)
-			{
+			public void onError(Throwable e) {
 
 			}
 
 			@Override
-			public void onNext(Drawable drawable)
-			{
+			public void onNext(Drawable drawable) {
 
 			}
 		});

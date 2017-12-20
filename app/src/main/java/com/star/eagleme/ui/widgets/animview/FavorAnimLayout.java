@@ -24,85 +24,80 @@ import java.util.Random;
 
 /**
  * Created by star on 2017/10/10.
+ *
  * @description: cos曲线配合imageview
  */
-public class FavorAnimLayout extends RelativeLayout
-{
-    private Point currentPoint;
+public class FavorAnimLayout extends RelativeLayout {
+	private Point currentPoint;
 	private LayoutParams lp;
 	private int mHeight;
 	private int mWidth;
-    private AnimatorSet animSet;
-    private TimeInterpolator interpolatorType = new LinearInterpolator();
+	private AnimatorSet animSet;
+	private TimeInterpolator interpolatorType = new LinearInterpolator();
 	private Random random = new Random();
 	//图片大小
 	private int dHeight;
 	private int dWidth;
 	//图片数组
-	private int[] mDrawbleSrc = new int[]{
-			R.mipmap.ic_live_praise_01, R.mipmap.ic_live_praise_02, R.mipmap.ic_live_praise_03, R.mipmap.ic_live_praise_04,
-			R.mipmap.ic_live_praise_05, R.mipmap.ic_live_praise_06, R.mipmap.ic_live_praise_07,R.mipmap.ic_live_praise_08};
-    public FavorAnimLayout(Context context)
-    {
-        super(context);
-        init();
-    }
-    public FavorAnimLayout(Context context, AttributeSet attrs)
-    {
-        super(context, attrs);
-        init();
-    }
+	private int[] mDrawbleSrc = new int[]{R.mipmap.ic_live_praise_01, R.mipmap.ic_live_praise_02, R.mipmap.ic_live_praise_03,
+			R.mipmap.ic_live_praise_04, R.mipmap.ic_live_praise_05, R.mipmap.ic_live_praise_06, R.mipmap.ic_live_praise_07,
+			R.mipmap.ic_live_praise_08};
 
-    private void init()
-    {
-	    //初始化显示的图片
-	    Drawable drawable = getResources().getDrawable(mDrawbleSrc[0]);
-	    dHeight = drawable.getIntrinsicHeight();
-	    dWidth = drawable.getIntrinsicWidth();
+	public FavorAnimLayout(Context context) {
+		super(context);
+		init();
+	}
 
-	    //底部 并且 水平居中
-	    lp = new LayoutParams(dWidth, dHeight);
-	    lp.addRule(CENTER_HORIZONTAL, TRUE);//这里的TRUE 要注意 不是true
-	    lp.addRule(ALIGN_PARENT_BOTTOM, TRUE);
-    }
+	public FavorAnimLayout(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		init();
+	}
+
+	private void init() {
+		//初始化显示的图片
+		Drawable drawable = getResources().getDrawable(mDrawbleSrc[0]);
+		dHeight = drawable.getIntrinsicHeight();
+		dWidth = drawable.getIntrinsicWidth();
+
+		//底部 并且 水平居中
+		lp = new LayoutParams(dWidth, dHeight);
+		lp.addRule(CENTER_HORIZONTAL, TRUE);//这里的TRUE 要注意 不是true
+		lp.addRule(ALIGN_PARENT_BOTTOM, TRUE);
+	}
 
 	@Override
-	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
-	{
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		mWidth = getMeasuredWidth();
 		mHeight = getMeasuredHeight();
 	}
 
 	//添加View
-	public void addSinAnim()
-	{
+	public void addSinAnim() {
 		ImageView imageView = new ImageView(getContext());
 		imageView.setLayoutParams(lp);
-		imageView.setImageDrawable(BitmapsUtil.getBmpDrawable(getContext(), mDrawbleSrc[random.nextInt(mDrawbleSrc.length)]));
+		imageView.setImageDrawable(
+				BitmapsUtil.getBmpDrawable(getContext(), mDrawbleSrc[random.nextInt(mDrawbleSrc.length)]));
 		addView(imageView);
 		startSinAnimation(imageView);
 	}
 
 	//开启动画
-	public void startSinAnimation(final ImageView view)
-	{
+	public void startSinAnimation(final ImageView view) {
 		Point startP = new Point(0, 0);
 		Point endP = new Point(mWidth - dWidth, mHeight);
 		final ValueAnimator valueAnimator = ValueAnimator.ofObject(new PointSinEvaluator(), startP, endP);
 		valueAnimator.setRepeatCount(-1);
 		valueAnimator.setRepeatMode(ValueAnimator.REVERSE);
 		valueAnimator.setTarget(view);
-		valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
-		{
+		valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 			@Override
-			public void onAnimationUpdate(ValueAnimator animation)
-			{
+			public void onAnimationUpdate(ValueAnimator animation) {
 				currentPoint = (Point) animation.getAnimatedValue();
 				view.setX(currentPoint.x);
 				view.setY(currentPoint.y);
 				// 这里顺便做一个alpha动画
-			//	view.setAlpha(1 - animation.getAnimatedFraction());
+				//	view.setAlpha(1 - animation.getAnimatedFraction());
 
 			}
 		});
@@ -117,10 +112,8 @@ public class FavorAnimLayout extends RelativeLayout
 
 
 	// Sets interpolator type.
-	public void setInterpolatorType(int type)
-	{
-		switch (type)
-		{
+	public void setInterpolatorType(int type) {
+		switch (type) {
 			case 1:
 				interpolatorType = new BounceInterpolator();
 				break;
@@ -147,18 +140,14 @@ public class FavorAnimLayout extends RelativeLayout
 		}
 	}
 
-	public void pauseAnimation()
-	{
-		if (animSet != null)
-		{
+	public void pauseAnimation() {
+		if (animSet != null) {
 			animSet.pause();
 		}
 	}
 
-	public void stopAnimation()
-	{
-		if (animSet != null)
-		{
+	public void stopAnimation() {
+		if (animSet != null) {
 			animSet.cancel();
 			this.clearAnimation();
 		}

@@ -19,52 +19,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Route(path = "/activity/refresh")
-public class RefreshActivity extends AppCompatActivity
-{
-    private PullRefreshLayout pullRefreshLayout;
-    private RecyclerView mRecyclerView;
-    private EasyAdapter mAdapter;
-    private List<EasyBean> reportResons ;
-    private Handler mHandler = new Handler();
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_refresh);
-        pullRefreshLayout = findViewById(R.id.crl);
-        mRecyclerView = findViewById(R.id.rv);
+public class RefreshActivity extends AppCompatActivity {
+	private PullRefreshLayout pullRefreshLayout;
+	private RecyclerView mRecyclerView;
+	private EasyAdapter mAdapter;
+	private List<EasyBean> reportResons;
+	private Handler mHandler = new Handler();
 
-        reportResons = new ArrayList<>();
-        reportResons.add(new EasyBean("one", false));
-        reportResons.add(new EasyBean("two", false));
-        reportResons.add(new EasyBean("three", false));
-        reportResons.add(new EasyBean("four", false));
-        reportResons.add(new EasyBean("five", false));
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_refresh);
+		pullRefreshLayout = findViewById(R.id.crl);
+		mRecyclerView = findViewById(R.id.rv);
 
-        mAdapter = new EasyAdapter(RefreshActivity.this, reportResons, (BaseApplication)getApplication());
-        LinearLayoutManager verticalManager = new LinearLayoutManager(RefreshActivity.this);
-        verticalManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(verticalManager);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addItemDecoration(new RecyclerViewDivider(RefreshActivity.this, LinearLayoutManager.VERTICAL, 2 , ContextCompat.getColor(RefreshActivity.this, R.color.color_312e36)));
+		reportResons = new ArrayList<>();
+		reportResons.add(new EasyBean("one", false));
+		reportResons.add(new EasyBean("two", false));
+		reportResons.add(new EasyBean("three", false));
+		reportResons.add(new EasyBean("four", false));
+		reportResons.add(new EasyBean("five", false));
 
-        //下拉刷新
-        pullRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener()
-        {
-            @Override
-            public void onRefresh()
-            {
-                mHandler.postDelayed(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        pullRefreshLayout.setRefreshing(false);
-                    }
-                }, 2 * 1000);
-            }
-        });
+		mAdapter = new EasyAdapter(RefreshActivity.this, reportResons, (BaseApplication) getApplication());
+		LinearLayoutManager verticalManager = new LinearLayoutManager(RefreshActivity.this);
+		verticalManager.setOrientation(LinearLayoutManager.VERTICAL);
+		mRecyclerView.setLayoutManager(verticalManager);
+		mRecyclerView.setAdapter(mAdapter);
+		mRecyclerView.addItemDecoration(new RecyclerViewDivider(RefreshActivity.this, LinearLayoutManager.VERTICAL, 2,
+				ContextCompat.getColor(RefreshActivity.this, R.color.color_312e36)));
 
-    }
+		//下拉刷新
+		pullRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				mHandler.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						pullRefreshLayout.setRefreshing(false);
+					}
+				}, 2 * 1000);
+			}
+		});
+
+	}
 
 }

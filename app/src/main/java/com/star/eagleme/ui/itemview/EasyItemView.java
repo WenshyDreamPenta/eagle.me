@@ -16,43 +16,36 @@ import com.star.eagleme.R;
 
 public class EasyItemView extends FrameLayout {
 
-    private ImageView ivReport;
-    private TextView tvReport;
+	private ImageView ivReport;
+	private TextView tvReport;
 
 
+	public EasyItemView(Context context) {
+		this(context, null);
+	}
 
-    public EasyItemView(Context context)
-    {
-        this(context, null);
-    }
+	public EasyItemView(Context context, AttributeSet attrs) {
+		this(context, attrs, 0);
+	}
 
-    public EasyItemView(Context context, AttributeSet attrs)
-    {
-        this(context, attrs, 0);
-    }
+	public EasyItemView(Context context, AttributeSet attrs, int defStyleAttr) {
+		super(context, attrs, defStyleAttr);
+		init();
+	}
 
-    public EasyItemView(Context context, AttributeSet attrs, int defStyleAttr)
-    {
-        super(context, attrs, defStyleAttr);
-        init();
-    }
+	private void init() {
 
-    private void init()
-    {
+		LayoutInflater.from(getContext()).inflate(R.layout.layout_report_item, this);
+		ivReport = (ImageView) findViewById(R.id.iv_report);
+		tvReport = (TextView) findViewById(R.id.tv_report);
+	}
 
-        LayoutInflater.from(getContext()).inflate(R.layout.layout_report_item, this);
-        ivReport = (ImageView) findViewById(R.id.iv_report);
-        tvReport = (TextView) findViewById(R.id.tv_report);
-    }
+	public void setReportReason(String reason) {
+		tvReport.setText(reason);
+	}
 
-    public void setReportReason(String reason)
-    {
-        tvReport.setText(reason);
-    }
+	public void setSelected(boolean isSelected) {
 
-    public void setSelected(boolean isSelected)
-    {
-
-    }
+	}
 }
 
