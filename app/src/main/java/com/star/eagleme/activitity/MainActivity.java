@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		switch (v.getId()) {
 			case R.id.tv_send:
 				String sendText = etText.getText().toString();
-				if (sendText != null && !sendText.equals("")) {
+				if (!sendText.equals("")) {
 					DataProtocol data = new DataProtocol();
 					data.setData(sendText);
 					data.setDtype(1);
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 					connClinet.closeConnect();
 				}
 				else {
-					Toast.makeText(this, "please connect server!", Toast.LENGTH_LONG);
+					Toast.makeText(this, "please connect server!", Toast.LENGTH_LONG).show();
 				}
 				break;
 			case R.id.tv_connect:
@@ -148,8 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	}
 
 	private void initThreadExcute() {
-		threadPoolExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS,
-				new LinkedBlockingQueue<Runnable>());
+		threadPoolExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
 		requestCallBack = new RequestCallBack() {
 
 			@Override
