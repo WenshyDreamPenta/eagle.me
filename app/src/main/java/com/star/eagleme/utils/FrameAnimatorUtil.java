@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Handler;
 import android.widget.ImageView;
 
-import com.star.eagleme.BaseApplication;
+import com.star.eagleme.Base.BaseApplication;
 
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;

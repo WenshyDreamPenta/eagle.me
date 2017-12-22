@@ -8,7 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.star.eagleme.BaseApplication;
+import com.star.eagleme.Base.BaseApplication;
 import com.star.eagleme.R;
 import com.star.eagleme.adapter.EasyAdapter;
 import com.star.eagleme.bean.EasyBean;
