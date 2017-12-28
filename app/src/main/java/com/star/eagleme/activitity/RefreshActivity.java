@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.r0adkll.slidr.Slidr;
 import com.star.eagleme.Base.BaseApplication;
 import com.star.eagleme.R;
 import com.star.eagleme.adapter.EasyAdapter;
@@ -30,6 +31,7 @@ public class RefreshActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_refresh);
+		Slidr.attach(this);
 		pullRefreshLayout = findViewById(R.id.crl);
 		mRecyclerView = findViewById(R.id.rv);
 
