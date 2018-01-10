@@ -9,14 +9,19 @@ import android.view.LayoutInflater;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <pre>
+ *     author: wangmx
+ *     time  : 2017/12/22
+ *     desc  : BaseRecycleAdapter 基类Adapter
+ * </pre>
+ */
 public abstract class BaseRecycleAdapter<VH extends ViewHolder> extends Adapter<VH>
 {
 
     protected BaseApplication mApplication;
     protected Context mContext;
-    protected LayoutInflater mInflater;
     protected List<?> mDatas = new ArrayList<>();
-    protected long mOldTime;
 
     public BaseRecycleAdapter(Context context, List<?> datas, BaseApplication baseApplication)
     {

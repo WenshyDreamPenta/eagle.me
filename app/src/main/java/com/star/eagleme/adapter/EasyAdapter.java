@@ -14,7 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by star on 2017/8/10.
+ * <pre>
+ *     author: wangmx
+ *     time  : 2017/12/22
+ *     desc  :
+ * </pre>
  */
 
 public class EasyAdapter extends BaseRecycleAdapter<EasyAdapter.ReportViewHolder> implements View.OnClickListener {

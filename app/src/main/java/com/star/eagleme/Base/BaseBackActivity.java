@@ -18,7 +18,7 @@ import com.star.eagleme.utils.BarUtils;
  * <pre>
  *     author: wangmx
  *     time  : 2017/12/22
- *     desc  : DrawerActivity 基类
+ *     desc  : BaseBackActivity 基类
  * </pre>
  */
 public abstract class BaseBackActivity extends BaseActivity {
