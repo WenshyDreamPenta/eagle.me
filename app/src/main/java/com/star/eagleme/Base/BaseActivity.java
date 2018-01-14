@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.star.eagleme.utils.CommonUtil;
+
 /**
  * <pre>
  *     author: wangmx
@@ -17,8 +19,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
 
 	//当前Activity 视图View
 	protected View contentView;
-	//上次点击时间
-	private long lastClick = 0;
 	protected BaseActivity mActivity;
 
 	@Override
@@ -36,18 +36,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
 		setContentView(contentView = LayoutInflater.from(this).inflate(layoutId, null));
 	}
 
-	//判断是否快速点击
-	private boolean isFastClick() {
-		long now = System.currentTimeMillis();
-		if (now - lastClick >= 200) {
-			lastClick = now;
-			return false;
-		}
-		return true;
-	}
-
 	@Override
 	public void onClick(final View view) {
-		if (!isFastClick()) onWidgetClick(view);
+		if (!CommonUtil.isFastClick()) onWidgetClick(view);
 	}
 }
